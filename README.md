@@ -1,4 +1,4 @@
-# Ahrefs::Api::Ruby
+# AhrefsApi
 
 Ahrefs API client library, written in Ruby.
 
