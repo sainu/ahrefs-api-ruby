@@ -1,8 +1,6 @@
 # Ahrefs::Api::Ruby
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/ahrefs/api/ruby`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Ahrefs API client library, written in Ruby.
 
 ## Installation
 
@@ -20,9 +18,29 @@ Or install it yourself as:
 
     $ gem install ahrefs-api-ruby
 
+## Setup
+
+You should get access token for API [Profile - Ahrefs API](https://ahrefs.com/api/profile).
+
 ## Usage
 
-TODO: Write usage instructions here
+```rb
+require 'ahrefs_api'
+
+AhrefsApi.configure do |config|
+  config.token = 'Your access token'  # required
+  config.timeout = 30                 # optional - request timeout(s)
+end
+
+client = AhrefsApi::Client.new
+client.target = 'example.com'
+client.mode_subdomains
+      .output_json
+      .from_backlinks_new_lost_counters
+      .where('date', '>', Date.today - 1.months)
+      .order(new: :desc)
+response = client.send_get
+```
 
 ## Development
 
